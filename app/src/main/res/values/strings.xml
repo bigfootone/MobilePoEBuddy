@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MobilePoEBuddy</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="ok"> OK</string>
+    <string name="aboutText">Items up to date as of patch 2.4.0.</string>
+</resources>
