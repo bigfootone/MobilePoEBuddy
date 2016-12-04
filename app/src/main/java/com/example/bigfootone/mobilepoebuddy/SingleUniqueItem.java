@@ -34,7 +34,7 @@ public class SingleUniqueItem implements Serializable {
 
     public void setItemID(int ItemID)
     {
-        this.itemID = itemID;
+        this.itemID = ItemID;
     }
 
     public String getItemCategory()

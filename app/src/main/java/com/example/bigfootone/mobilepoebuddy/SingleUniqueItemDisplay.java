@@ -45,6 +45,7 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
     public ImageView favouritesButton;
     public Integer ID;
     public boolean favourite;
+    public SingleUniqueItem singleUniqueItem;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
@@ -74,7 +75,7 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         endRow = (Integer) intent.getSerializableExtra("NumberOfRows");
 
         final UniqueItemDatabaseManager databaseManager = new UniqueItemDatabaseManager(getApplicationContext(), "UniqueItemDB.s3db", null, 1);
-        SingleUniqueItem singleUniqueItem = databaseManager.findItemNameSearch(uniqueItemName);
+        singleUniqueItem = databaseManager.findItemNameSearch(uniqueItemName);
         itemName = singleUniqueItem.getItemUniqueName();
         itemFlavourText = singleUniqueItem.getItemFlavourText();
         itemDescription = singleUniqueItem.getItemDescription();
@@ -82,15 +83,7 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         ID = singleUniqueItem.getItemID();
         favourite = singleUniqueItem.getItemFavourite();
         Log.e("Tag",Boolean.toString(favourite));
-
-        if(favourite)
-        {
-            favouritesButton.setImageResource(android.R.drawable.btn_star_big_on);
-        }
-        else
-        {
-            favouritesButton.setImageResource(android.R.drawable.btn_star_big_off);
-        }
+        updateIcon();
 
         imageLink = singleUniqueItem.getItemImageLink();
         int imageID = getResources().getIdentifier(imageLink, "drawable" ,getPackageName());
@@ -123,7 +116,9 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
             @Override
             public void onClick(View v)
             {
-                databaseManager.addToFavourites(ID, true);
+                singleUniqueItem.setItemFavourite(!singleUniqueItem.getItemFavourite());
+                databaseManager.addToFavourites(ID, singleUniqueItem.getItemFavourite());
+                updateIcon();
             }
         });
     }
@@ -144,6 +139,18 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         intent.putExtra("NumberOfRows", endRow);
         startActivityForResult(intent, 0);
         return true;
+    }
+
+    public void updateIcon()
+    {
+        if(singleUniqueItem.getItemFavourite())
+        {
+            favouritesButton.setImageResource(android.R.drawable.btn_star_big_on);
+        }
+        else
+        {
+            favouritesButton.setImageResource(android.R.drawable.btn_star_big_off);
+        }
     }
 
 }

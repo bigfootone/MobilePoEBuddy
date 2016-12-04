@@ -87,7 +87,7 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
     {
         boolean databaseExist = dbCheck();
 
-        if(!databaseExist)
+        if(databaseExist)
         {
             this.getWritableDatabase();
             try
@@ -122,7 +122,7 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
             database.close();
         }
 
-        return  database != null ? false : true;
+        return  database != null ? true : false;
         //return false;
     }
 
@@ -170,9 +170,9 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
             singleUniqueItem.setItemEvasionValue(cursor.getString(4));
             singleUniqueItem.setItemEnergyShieldValue(cursor.getString(5));
             singleUniqueItem.setItemFlavourText(cursor.getString(6));
-            singleUniqueItem.setItemID(Integer.parseInt(cursor.getString(7)));
-            singleUniqueItem.setItemItemLevel(Integer.parseInt(cursor.getString(8)));
-            singleUniqueItem.setItemFavourite(Boolean.parseBoolean(cursor.getString(9)));
+            singleUniqueItem.setItemID(cursor.getInt(7));
+            singleUniqueItem.setItemItemLevel(cursor.getInt(8));
+            singleUniqueItem.setItemFavourite(cursor.getInt(9) == 1);
             singleUniqueItem.setItemCategory(cursor.getString(10));
             singleUniqueItem.setItemSubCategory(cursor.getString(11));
             singleUniqueItem.setItemImageLink(cursor.getString(12));
@@ -216,9 +216,9 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
             singleUniqueItem.setItemEvasionValue(cursor.getString(4));
             singleUniqueItem.setItemEnergyShieldValue(cursor.getString(5));
             singleUniqueItem.setItemFlavourText(cursor.getString(6));
-            singleUniqueItem.setItemID(Integer.parseInt(cursor.getString(7)));
-            singleUniqueItem.setItemItemLevel(Integer.parseInt(cursor.getString(8)));
-            singleUniqueItem.setItemFavourite(Boolean.parseBoolean(cursor.getString(9)));
+            singleUniqueItem.setItemID(cursor.getInt(7));
+            singleUniqueItem.setItemItemLevel(cursor.getInt(8));
+            singleUniqueItem.setItemFavourite(cursor.getInt(9) == 1);
             singleUniqueItem.setItemCategory(cursor.getString(10));
             singleUniqueItem.setItemSubCategory(cursor.getString(11));
             singleUniqueItem.setItemImageLink(cursor.getString(12));
@@ -234,17 +234,20 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
 
     public void addToFavourites(Integer ID, Boolean value)
     {
-        String query = "UPDATE " + TBL_UNIQUEINFO + " SET " + COL_ITEMFAVOURITE + " = \"" + value + "\"" + " WHERE "+ COL_ITEMID + " = \"" + ID + "\"" ;
+        String query = "UPDATE " + TBL_UNIQUEINFO + " SET " + COL_ITEMFAVOURITE  + " = " + (value? 1:0) + " WHERE " + COL_ITEMID + " = " + ID;
         SQLiteDatabase database = this.getWritableDatabase();
+
         try
         {
             database.execSQL(query);
             Log.e("SQLHelper", "Updated");
         }
-        catch (SQLiteException e)
+        catch(SQLiteException e)
         {
             Log.e("SQLHelper", "Could not update");
         }
+
+
         database.close();
     }
 

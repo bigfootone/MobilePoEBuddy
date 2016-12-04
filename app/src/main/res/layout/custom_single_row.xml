@@ -8,6 +8,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/uniqueSingleRow"
-        android:textSize="20dp"
-        android:padding="15dp" />
+        android:textSize="20sp"
+        android:paddingStart="30dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"/>
 </LinearLayout>
