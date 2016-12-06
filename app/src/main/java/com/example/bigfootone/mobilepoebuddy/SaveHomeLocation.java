@@ -2,6 +2,12 @@ package com.example.bigfootone.mobilepoebuddy;
 
 import android.app.Activity;
 import android.content.SharedPreferences;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.util.Log;
+
+import com.google.android.gms.maps.MapView;
 
 /**
  * Created by Bigfootone on 05/12/2016.
@@ -29,5 +35,27 @@ public class SaveHomeLocation extends Activity{
 
     public void setLongitude(float longitude) {
         Longitude = longitude;
+    }
+
+    public SaveHomeLocation(SharedPreferences preferences)
+    {
+        setLatitude(1);
+        setLongitude(1);
+        try
+        {
+            this.sharedPrefs = preferences;
+        }
+        catch (Exception e)
+        {
+            Log.e("pref", "Save failed to load");
+        }
+    }
+
+
+    public void savePreferences(String key, String value)
+    {
+        SharedPreferences.Editor editor = sharedPrefs.edit();
+        editor.putString(key, value);
+        editor.commit();
     }
 }

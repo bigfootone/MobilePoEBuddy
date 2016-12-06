@@ -27,10 +27,6 @@
         <activity android:name=".devPostActivity" />
         <activity android:name=".SearchedDatabasedActivity" />
         <activity android:name=".SingleUniqueItemDisplay" />
-
-        <meta-data
-            android:name="MobilePoEBuddy"
-            android:value="AIzaSyBInSSwVaO8aWRw1HroJPoqRSgWZXu8xaE" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -41,7 +37,7 @@
         -->
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyCYSFbEgjrfMTwPDj-bpbdRrOB8wIlEV-0" />
+            android:value="AIzaSyBFeLk7xwuYCIJG0FiyIqnQkthGeKi46Nc" />
 
     </application>
 
