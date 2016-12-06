@@ -16,6 +16,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
@@ -46,16 +47,15 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
     public Integer ID;
     public boolean favourite;
     public SingleUniqueItem singleUniqueItem;
+    public ScrollView listView;
 
     @Override
     public void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.unique_item_layout);
-
-        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
-        actionBar.setTitle(itemName);
-        actionBar.setDisplayHomeAsUpEnabled(true);
+        listView = (ScrollView) findViewById(R.id.mainScrollView);
+        listView.setBackgroundColor(Color.rgb(90,90,90));
 
         uniqueName = (TextView) findViewById(R.id.UniqueName);
         uniqueBaseType = (TextView) findViewById(R.id.UniqueBaseType);
@@ -84,6 +84,10 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         favourite = singleUniqueItem.getItemFavourite();
         Log.e("Tag",Boolean.toString(favourite));
         updateIcon();
+
+        android.support.v7.app.ActionBar actionBar = getSupportActionBar();
+        actionBar.setTitle(itemName);
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
         imageLink = singleUniqueItem.getItemImageLink();
         int imageID = getResources().getIdentifier(imageLink, "drawable" ,getPackageName());

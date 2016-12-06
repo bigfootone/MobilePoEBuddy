@@ -1,6 +1,7 @@
 package com.example.bigfootone.mobilepoebuddy;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -22,6 +23,7 @@ public class SearchedDatabasedActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searched_databased);
         listView = (ListView) findViewById(R.id.searchedListView);
+        listView.setBackgroundColor(Color.rgb(90,90,90));
 
         Intent intent = getIntent();
         String subCategory = (String) intent.getSerializableExtra("subCategory");

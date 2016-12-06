@@ -3,11 +3,15 @@ package com.example.bigfootone.mobilepoebuddy;
 import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -51,6 +55,7 @@ public class UniqueItemFragment extends Fragment {
     ExpandableListView expandableList;
     HashMap<String, List<String>> childData;
     List<String> headers;
+    MenuItem clearAll;
 
     public UniqueItemFragment()
     {
@@ -67,15 +72,8 @@ public class UniqueItemFragment extends Fragment {
         endID = databaseManager.getNumberOfRows("ID") + 3;
 
         singleUniqueItemInfo = new SingleUniqueItem();
-        try
-        {
-            databaseManager.dbCreate();
-        }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
 
+        setHasOptionsMenu(true);
 
         childData = new HashMap<>();
 
@@ -112,6 +110,7 @@ public class UniqueItemFragment extends Fragment {
 
         expandableList = (ExpandableListView) view.findViewById(R.id.UniqueExpandableListView2);
         expandableAdapter = new UniqueItemExpandableListAdapter(getActivity().getApplicationContext(), currentCategories, childData);
+        expandableList.setBackgroundColor(Color.rgb(90,90,90));
         expandableList.setAdapter(expandableAdapter);
 
         //arrayAdapter = new UniqueItemArrayAdapter(getActivity().getApplicationContext(), currentCategories);
@@ -137,26 +136,35 @@ public class UniqueItemFragment extends Fragment {
                 return false;
             }
         });
+    }
 
-/*        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
+    @Override
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
+    {
+        super.onCreateOptionsMenu(menu, inflater);
+        clearAll = menu.add("Clear Favourites");
+
+        clearAll.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id)
+            public boolean onMenuItemClick(MenuItem item)
             {
-                String currentCategory = (String) listView.getAdapter().getItem(position);
-                Intent intent = new Intent(getContext(), SearchedDatabasedActivity.class);
-                intent.putExtra("CategorySearched", currentCategory);
-                intent.putExtra("NumberOfRows", endID);
-                startActivity(intent);
+                clearFavourites();
+                return true;
             }
         });
-
-        for (String category : currentCategories)
-        {
-            Log.e("tag", category);
-        }
-*/
     }
+
+    public void clearFavourites()
+    {
+        UniqueItemDatabaseManager databaseManager = new UniqueItemDatabaseManager(getContext(), "UniqueItemDB.s3db", null, 1);
+        endID = databaseManager.getNumberOfRows("ID") + 3;
+
+        for(int i = 3; i < endID; i++)
+        {
+            databaseManager.clearFavourites(i);
+        }
+    }
+
 
 
 }

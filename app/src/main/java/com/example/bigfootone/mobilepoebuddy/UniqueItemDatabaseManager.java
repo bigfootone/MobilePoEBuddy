@@ -83,16 +83,15 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
         }
     }
 
-    public void dbCreate() throws IOException
+    static public void dbCreate(Context context) throws IOException
     {
-        boolean databaseExist = dbCheck();
+           boolean databaseExist = dbCheck();
 
-        if(databaseExist)
+        if(!databaseExist)
         {
-            this.getWritableDatabase();
             try
             {
-                copyDatabaseFromAssets();
+                copyDatabaseFromAssets(context);
             }
             catch (IOException e)
             {
@@ -101,7 +100,7 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
         }
     }
 
-    private boolean dbCheck()
+    static private boolean dbCheck()
     {
         SQLiteDatabase database = null;
 
@@ -122,11 +121,11 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
             database.close();
         }
 
-        return  database != null ? true : false;
+        return database != null;
         //return false;
     }
 
-    private void copyDatabaseFromAssets() throws IOException
+    static private void copyDatabaseFromAssets(Context context) throws IOException
     {
         InputStream inputStream = null;
         OutputStream outputStream = null;
@@ -134,8 +133,12 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
 
         try
         {
-            inputStream = appContext.getAssets().open(DB_Name);
-            outputStream = new FileOutputStream(databaseFileName);
+            inputStream = context.getAssets().open(DB_Name);
+            File dbDir = new File(DB_PATH);
+            dbDir.mkdirs();
+            File dbFile = new File(dbDir, DB_Name);
+            dbFile.createNewFile();
+            outputStream = new FileOutputStream(dbFile);
             byte[] buffer = new byte[1024];
             int length;
             while((length = inputStream.read(buffer)) > 0)
@@ -251,5 +254,18 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
         database.close();
     }
 
-
+    public void clearFavourites(Integer ID)
+    {
+        String query = "Update " + TBL_UNIQUEINFO + " SET " + COL_ITEMFAVOURITE + " = " + (0) + " WHERE " + COL_ITEMID + " = " + ID;
+        SQLiteDatabase database = this.getWritableDatabase();
+        try
+        {
+            database.execSQL(query);
+        }
+        catch (SQLiteException e)
+        {
+            Log.e("SQHelper", "Could not remove favourites");
+        }
+        database.close();
+    }
 }

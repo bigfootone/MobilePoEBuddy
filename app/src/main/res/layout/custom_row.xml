@@ -7,11 +7,13 @@
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/titleText" />
+        android:id="@+id/titleText"
+        android:textColor="#C8C8C8" />
 
     <TextView
         android:text="TextView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/devText" />
+        android:id="@+id/devText"
+        android:textColor="#C8C8C8"/>
 </LinearLayout>

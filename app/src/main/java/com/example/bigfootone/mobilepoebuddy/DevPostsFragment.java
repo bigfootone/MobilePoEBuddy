@@ -2,6 +2,7 @@ package com.example.bigfootone.mobilepoebuddy;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -47,6 +48,7 @@ public class DevPostsFragment extends Fragment {
     {
         View view = inflater.inflate(R.layout.fragment_dev_posts, container, false);
         listView = (ListView) view.findViewById(R.id.list_view);
+        listView.setBackgroundColor(Color.rgb(90,90,90));
         parseXML();
 
         setHasOptionsMenu(true);

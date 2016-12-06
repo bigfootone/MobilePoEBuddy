@@ -50,7 +50,7 @@ public class devPostActivity extends AppCompatActivity {
     Integer arrayIsQuote = 2;
     Integer arrayInQuote = 3;
     Integer arrayImage = 4;
-    public Integer baseColour = 230;
+    public Integer baseColour = 90;
     public Integer colourRedcution = 20;
     public LinearLayout previousQuote;
     public boolean commentChain = false;
@@ -80,7 +80,7 @@ public class devPostActivity extends AppCompatActivity {
         splitContent();
 
         ScrollView scrollView = new ScrollView(this);
-        scrollView.setBackgroundColor(Color.rgb(baseColour,baseColour,baseColour));
+        scrollView.setBackgroundColor(Color.rgb(90,90,90));
         LinearLayout linearLayout = new LinearLayout(this);
         linearLayout.setPadding(50,40,50,40);
         linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -98,11 +98,13 @@ public class devPostActivity extends AppCompatActivity {
             TextView devName = new TextView(this);
             String userNameText = responseList[arrayUser][i];
             devName.setText(userNameText + " wrote: ");
+            devName.setTextColor(Color.rgb(200,200,200));
 
             TextView postContent = new TextView(this);
             String userPostText = responseList[arrayComment][i];
             splitContent(userPostText);
             postContent.setText(content);
+            postContent.setTextColor(Color.rgb(200,200,200));
 
             if(responseList[arrayIsQuote][i] == "1")
             {
@@ -178,6 +180,7 @@ public class devPostActivity extends AppCompatActivity {
         postLink.setClickable(true);
         postLink.setMovementMethod(LinkMovementMethod.getInstance());
         postLink.setLayoutParams(layoutParams);
+        postLink.setTextColor(Color.rgb(200,200,200));
         linearLayout.addView(postLink);
 
         this.setContentView(scrollView);

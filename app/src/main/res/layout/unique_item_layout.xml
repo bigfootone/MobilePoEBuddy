@@ -7,12 +7,16 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:id="@+id/mainScrollView"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentStart="true">
 
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:weightSum="1">
 
             <RelativeLayout
                 android:layout_width="match_parent"
@@ -27,7 +31,8 @@
                     android:gravity="center_vertical"
                     android:id="@+id/UniqueBaseType"
                     android:layout_below="@+id/UniqueName"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:textColor="#C8C8C8"/>
 
                 <TextView
                     android:text="Name"
@@ -37,10 +42,10 @@
                     android:layout_weight="0.04"
                     android:textAlignment="center"
                     android:gravity="bottom"
-                    android:layout_below="@+id/space"
                     android:layout_alignParentStart="true"
                     android:layout_marginTop="17dp"
-                    android:textSize="16sp" />
+                    android:textSize="16sp"
+                    android:textColor="#C8C8C8"/>
 
                 <ImageView
                     android:layout_width="match_parent"
@@ -72,7 +77,8 @@
                 android:id="@+id/linearLayout5"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="18dp">
+                android:layout_marginBottom="18dp"
+                android:layout_weight="6.17">
 
                 <TextView
                     android:text="FlavourText"
@@ -84,7 +90,8 @@
                     android:paddingBottom="10dp"
                     android:textAlignment="center"
                     android:layout_above="@+id/linearLayout5"
-                    android:layout_alignParentStart="true" />
+                    android:layout_alignParentStart="true"
+                    android:textColor="#C8C8C8"/>
 
                 <LinearLayout
                     android:orientation="horizontal"
@@ -99,25 +106,28 @@
                         android:id="@+id/UniqueArmourTitle"
                         android:textAlignment="center"
                         android:layout_weight="1"
-                        android:gravity="fill" />
+                        android:gravity="fill"
+                        android:textColor="#C8C8C8"/>
 
                     <TextView
-                            android:text="Evasion"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/UniqueEvasionTitle"
-                            android:textAlignment="center"
+                        android:text="Evasion"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/UniqueEvasionTitle"
+                        android:textAlignment="center"
                         android:layout_weight="1"
-                        android:gravity="fill" />
+                        android:gravity="fill"
+                        android:textColor="#C8C8C8"/>
 
                     <TextView
-                            android:text="Energy Shield"
-                            android:layout_width="match_parent"
-                            android:layout_height="match_parent"
-                            android:id="@+id/UniqueESTitle"
-                            android:textAlignment="center"
+                        android:text="Energy Shield"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:id="@+id/UniqueESTitle"
+                        android:textAlignment="center"
                         android:layout_weight="1"
-                        android:gravity="fill" />
+                        android:gravity="fill"
+                        android:textColor="#C8C8C8"/>
                 </LinearLayout>
 
                 <LinearLayout
@@ -133,7 +143,8 @@
                         android:id="@+id/UniqueArmourValue"
                         android:textAlignment="center"
                         android:layout_weight="1"
-                        android:gravity="fill" />
+                        android:gravity="fill"
+                        android:textColor="#C8C8C8"/>
 
                     <TextView
                             android:text="TextView"
@@ -142,7 +153,8 @@
                             android:id="@+id/UniqueEvasionValue"
                             android:textAlignment="center"
                         android:layout_weight="1"
-                        android:gravity="fill" />
+                        android:gravity="fill"
+                        android:textColor="#C8C8C8"/>
 
                     <TextView
                             android:text="TextView"
@@ -151,7 +163,8 @@
                             android:id="@+id/UniqueESValue"
                             android:textAlignment="center"
                         android:layout_weight="1"
-                        android:gravity="fill" />
+                        android:gravity="fill"
+                        android:textColor="#C8C8C8"/>
 
                 </LinearLayout>
 
@@ -162,13 +175,8 @@
                     android:textAlignment="center"
                     android:layout_height="wrap_content"
                     android:paddingTop="10dp"
-                    android:paddingBottom="10dp" />
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
-
-                </RelativeLayout>
+                    android:paddingBottom="10dp"
+                    android:textColor="#C8C8C8"/>
 
             </LinearLayout>
         </LinearLayout>

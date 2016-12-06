@@ -11,12 +11,14 @@ import android.support.v7.app.ActionBar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.io.IOException;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -28,6 +30,16 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        try
+        {
+            UniqueItemDatabaseManager.dbCreate(this);
+        }
+        catch (IOException e)
+        {
+            Log.e("Tag1", "Error creating database");
+        }
+
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("PoE Buddy");

@@ -25,7 +25,7 @@ public class SwipeViewAdapter extends FragmentStatePagerAdapter {
             case 1:
                 return new UniqueItemFragment();
             case 2:
-                return new DevPostsFragment();
+                return new MapActivity();
         }
         return null;
     }

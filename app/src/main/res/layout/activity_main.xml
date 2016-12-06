@@ -4,7 +4,6 @@
     android:id="@+id/activity_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="16dp"
     android:background="#ffffff"
     tools:context="com.example.bigfootone.mobilepoebuddy.MainActivity">
 
