@@ -43,18 +43,10 @@ public class UniqueItemFragment extends Fragment {
 
     SingleUniqueItem singleUniqueItemInfo;
     Integer endID;
-    private ListView listView;
     private ArrayList<String> currentCategories = new ArrayList<>();
-    private ArrayList<String> currentSubCategories = new ArrayList<>();
-    private UniqueItemArrayAdapter arrayAdapter;
-    private String [][] categoryInfo = new String[2][50];
-    private int category = 0;
-    private int subCategory = 1;
-
     UniqueItemExpandableListAdapter expandableAdapter;
     ExpandableListView expandableList;
     HashMap<String, List<String>> childData;
-    List<String> headers;
     MenuItem clearAll;
 
     public UniqueItemFragment()
@@ -66,15 +58,14 @@ public class UniqueItemFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
     {
         View view = inflater.inflate(R.layout.fragment_unique_item, container, false);
-        //listView = (ListView) view.findViewById(R.id.uniqueItemListView);
+        setHasOptionsMenu(true);
 
         UniqueItemDatabaseManager databaseManager = new UniqueItemDatabaseManager(getContext(), "UniqueItemDB.s3db", null, 1);
         endID = databaseManager.getNumberOfRows("ID") + 3;
 
         singleUniqueItemInfo = new SingleUniqueItem();
 
-        setHasOptionsMenu(true);
-
+        //create a new hasmap for the expandable list
         childData = new HashMap<>();
 
         for(int i = 3; i < endID; i++)
@@ -83,15 +74,18 @@ public class UniqueItemFragment extends Fragment {
             String itemCategory = singleUniqueItemInfo.getItemCategory();
             String itemSubCategory = singleUniqueItemInfo.getItemSubCategory();
 
+            //for every item in the database, check if the current category is added as a key to the hashmap
             List<String> list;
             if(childData.containsKey(itemCategory))
             {
                 list = childData.get(itemCategory);
+                //if the subcategory does not exist for that key, add it
                 if(!list.contains(itemSubCategory))
                 {
                     list.add(itemSubCategory);
                 }
             }
+            //if the category does not exist, add the category as a key and the subcategory as a value
             else
             {
                 list = new ArrayList<>();
@@ -101,10 +95,11 @@ public class UniqueItemFragment extends Fragment {
             }
         }
 
+        //logging categories to subcategories
         for (Map.Entry<String, List<String>> entry : childData.entrySet()) {
             String Category = entry.getKey();
             for(String Subcategory : entry.getValue()) {
-                Log.e("Testy", "Category (" + Category + ") has (" + Subcategory + ")");
+                Log.e("Test", "Category (" + Category + ") has (" + Subcategory + ")");
             }
         }
 
@@ -113,8 +108,6 @@ public class UniqueItemFragment extends Fragment {
         expandableList.setBackgroundColor(Color.rgb(90,90,90));
         expandableList.setAdapter(expandableAdapter);
 
-        //arrayAdapter = new UniqueItemArrayAdapter(getActivity().getApplicationContext(), currentCategories);
-        //listView.setAdapter(arrayAdapter);
         return view;
     }
 
@@ -123,6 +116,7 @@ public class UniqueItemFragment extends Fragment {
     {
         super.onStart();
 
+        //if a value in the hashmap is clicked, open an activiy and pass in that subcategory
         expandableList.setOnChildClickListener(new ExpandableListView.OnChildClickListener()
         {
             @Override
@@ -149,6 +143,7 @@ public class UniqueItemFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item)
             {
                 clearFavourites();
+                Toast.makeText(getContext(), "Favourites cleared", Toast.LENGTH_LONG).show();
                 return true;
             }
         });

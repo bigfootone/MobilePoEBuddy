@@ -31,18 +31,9 @@ public class devPostActivity extends AppCompatActivity {
 
     public String poster;
     public String content;
-    public String contentFiltered;
     public String link;
     public String linkActualText;
-    public TextView posterText;
-    public TextView contentText;
-    public TextView linkText;
-    public String username;
-    public String userPost;
     public String[] contentSplit;
-    public ArrayList<String> usernamesArray = new ArrayList<>();
-    public ArrayList<String> userCommentArray = new ArrayList<>();
-    public String devComment;
     String [][] responseList = new String[5][10];
     Integer currentComment = 0;
     Integer arrayUser = 0;
@@ -52,7 +43,6 @@ public class devPostActivity extends AppCompatActivity {
     Integer arrayImage = 4;
     public Integer baseColour = 90;
     public Integer colourRedcution = 20;
-    public LinearLayout previousQuote;
     public boolean commentChain = false;
     public int chainReference = 0;
 
@@ -61,11 +51,12 @@ public class devPostActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
 
-
+        //create action bar
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("PoE Buddy");
         actionBar.setDisplayHomeAsUpEnabled(true);
 
+        //create intent and receive information about the post that was clicked
         Intent intent = getIntent();
         SingleDevPost devPost = (SingleDevPost) intent.getSerializableExtra("postClicked");
         poster = devPost.getPostPoster();
@@ -79,6 +70,7 @@ public class devPostActivity extends AppCompatActivity {
 
         splitContent();
 
+        //setting up the scrollview
         ScrollView scrollView = new ScrollView(this);
         scrollView.setBackgroundColor(Color.rgb(90,90,90));
         LinearLayout linearLayout = new LinearLayout(this);
@@ -86,26 +78,31 @@ public class devPostActivity extends AppCompatActivity {
         linearLayout.setOrientation(LinearLayout.VERTICAL);
         scrollView.addView(linearLayout);
 
+        //setting up parameters for comment/main post
         LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         layoutParams.setMargins(50, 40, 50, 40);
         LinearLayout.LayoutParams layoutParams2 = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
         layoutParams2.setMargins(30, 20, 30, 20);
 
 
+        //adding every comment to the scrollview
         for (int i = 0; i <= currentComment; i++)
         {
 
+            //grabbing username and formatting
             TextView devName = new TextView(this);
             String userNameText = responseList[arrayUser][i];
             devName.setText(userNameText + " wrote: ");
             devName.setTextColor(Color.rgb(200,200,200));
 
+            //grabbing single comment and formatting
             TextView postContent = new TextView(this);
             String userPostText = responseList[arrayComment][i];
             splitContent(userPostText);
             postContent.setText(content);
             postContent.setTextColor(Color.rgb(200,200,200));
 
+            //if comment is a quote
             if(responseList[arrayIsQuote][i] == "1")
             {
 
@@ -113,6 +110,7 @@ public class devPostActivity extends AppCompatActivity {
                 devName.setLayoutParams(layoutParams);
                 postContent.setLayoutParams(layoutParams);
 
+                //if comment is in a quote
                 if(responseList[arrayInQuote][i] != "1")
                 {
                     singleCommentLayout.setOrientation(LinearLayout.VERTICAL);
@@ -121,6 +119,7 @@ public class devPostActivity extends AppCompatActivity {
                     singleCommentLayout.addView(postContent);
                     linearLayout.addView(singleCommentLayout);
                 }
+                //if comment is not in a quote
                 else
                 {
                     singleCommentLayout.setOrientation(LinearLayout.VERTICAL);
@@ -130,7 +129,7 @@ public class devPostActivity extends AppCompatActivity {
                     linearLayout.addView(singleCommentLayout);
                 }
 
-
+                //check for images and add
                 if(responseList[arrayImage][i] != null)
                 {
                     ImageView imageView = new ImageView(this);
@@ -141,12 +140,14 @@ public class devPostActivity extends AppCompatActivity {
                     singleCommentLayout.addView(imageView);
                 }
 
+                //add a border to the textview
                 GradientDrawable borders = new GradientDrawable();
                 borders.setCornerRadius(20);
                 borders.setStroke(5, Color.YELLOW);
                 borders.setColor(Color.rgb(baseColour - 20,baseColour - 20,baseColour - 20));
                 singleCommentLayout.setBackground(borders);
             }
+            //comment is not a quote
             else
             {
 
@@ -175,6 +176,7 @@ public class devPostActivity extends AppCompatActivity {
 
         }
 
+        //add link to original page at the end of the view
         TextView postLink = new TextView(this);
         postLink.setText(Html.fromHtml(linkActualText));
         postLink.setClickable(true);
@@ -186,6 +188,7 @@ public class devPostActivity extends AppCompatActivity {
         this.setContentView(scrollView);
     }
 
+    //split up comments
     public void splitContent()
     {
         //Is there quote?

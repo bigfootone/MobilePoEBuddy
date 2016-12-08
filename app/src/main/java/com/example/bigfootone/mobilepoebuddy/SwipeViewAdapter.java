@@ -11,10 +11,12 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 public class SwipeViewAdapter extends FragmentStatePagerAdapter {
 
+
     public SwipeViewAdapter(FragmentManager fm) {
         super(fm);
     }
 
+    //change fragment
     @Override
     public android.support.v4.app.Fragment getItem(int position)
     {
@@ -26,16 +28,20 @@ public class SwipeViewAdapter extends FragmentStatePagerAdapter {
                 return new UniqueItemFragment();
             case 2:
                 return new MapActivity();
+            case 3:
+                return new PoELogo();
         }
         return null;
     }
 
+    //number of fragments
     @Override
     public int getCount()
     {
-        return 3;
+        return 4;
     }
 
+    //set fragment name
     @Override
     public CharSequence getPageTitle(int position)
     {
@@ -47,6 +53,8 @@ public class SwipeViewAdapter extends FragmentStatePagerAdapter {
                 return "Uniques";
             case 2:
                 return "Maps";
+            case 3:
+                return "PoE Logo";
         }
         return null;
     }

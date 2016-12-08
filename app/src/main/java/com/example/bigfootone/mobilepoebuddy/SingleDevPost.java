@@ -74,6 +74,7 @@ public class SingleDevPost implements Serializable{
 
     public void splitTitle()
     {
+        //May be unnecessary splitting, used to get title/devname from title tag.
         splitTitle = postTitle.split("(?<= - )");
         postTitle = "";
         for(int i = 1; i < splitTitle.length; i++)

@@ -25,6 +25,7 @@ public class AsyncImageLoader extends AsyncTask <String, Void, Bitmap>{
         this.parsedImage = image;
     }
 
+    //load images in a seperate thread
     @Override
     protected Bitmap doInBackground(String... urls)
     {

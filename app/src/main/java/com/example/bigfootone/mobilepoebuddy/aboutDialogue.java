@@ -6,6 +6,7 @@ import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatDialogFragment;
+import android.widget.Toast;
 
 
 /**
@@ -26,7 +27,6 @@ public class aboutDialogue extends DialogFragment {
         });
 
         aboutDialog.setTitle("About");
-        //aboutDialog.setIcon(android.R.drawable.arrow_down_float);
         return  aboutDialog.create();
     }
 }

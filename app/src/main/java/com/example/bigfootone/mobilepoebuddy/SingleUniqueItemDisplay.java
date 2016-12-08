@@ -57,6 +57,7 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         listView = (ScrollView) findViewById(R.id.mainScrollView);
         listView.setBackgroundColor(Color.rgb(90,90,90));
 
+        //find the textviews for each piece of information
         uniqueName = (TextView) findViewById(R.id.UniqueName);
         uniqueBaseType = (TextView) findViewById(R.id.UniqueBaseType);
         uniqueFlavourText = (TextView) findViewById(R.id.UniqueFlavourText);
@@ -70,10 +71,12 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         image = (ImageView) findViewById(R.id.uniqueImageView);
         favouritesButton = (ImageView) findViewById(R.id.favouritesButton);
 
+        //get the item name
         Intent intent = getIntent();
         String uniqueItemName = (String) intent.getSerializableExtra("name");
         endRow = (Integer) intent.getSerializableExtra("NumberOfRows");
 
+        //get the information for the specific item
         final UniqueItemDatabaseManager databaseManager = new UniqueItemDatabaseManager(getApplicationContext(), "UniqueItemDB.s3db", null, 1);
         singleUniqueItem = databaseManager.findItemNameSearch(uniqueItemName);
         itemName = singleUniqueItem.getItemUniqueName();
@@ -93,6 +96,7 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         int imageID = getResources().getIdentifier(imageLink, "drawable" ,getPackageName());
         Drawable actualImage = getResources().getDrawable(imageID);
 
+        //set textviews
         uniqueBaseType.setText(singleUniqueItem.getItemBaseType());
         uniqueArmourValue.setText(singleUniqueItem.getItemArmourValue());
         uniqueEvasionValue.setText(singleUniqueItem.getItemEvasionValue());
@@ -105,6 +109,7 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         uniqueDescription.setText(itemDescription);
         image.setImageDrawable(actualImage);
 
+        //add borders to information in the table
         GradientDrawable borders = new GradientDrawable();
         borders.setCornerRadius(0);
         borders.setStroke(5, Color.BLACK);
@@ -116,6 +121,7 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         esText.setBackground(borders);
         uniqueDescription.setBackground(borders);
 
+        //if the favourites icon is clicked, update the database to the opposite of the current status
         favouritesButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v)
@@ -127,15 +133,16 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         });
     }
 
+    //remove all <..> tags that were added for formatting
     public void splitText(String flavourText, String description)
     {
         flavourText = itemFlavourText.replaceAll("<br>", "\n");
         description = itemDescription.replaceAll("<br>", "\n");
         this.itemDescription = description;
         this.itemFlavourText = flavourText;
-
     }
 
+    //open the previous view when the return button is clicked in the action bar
     public boolean onOptionsItemSelected(MenuItem item)
     {
         Intent intent = new Intent(getApplicationContext(), SearchedDatabasedActivity.class);
@@ -145,6 +152,7 @@ public class SingleUniqueItemDisplay extends AppCompatActivity
         return true;
     }
 
+    //updates the favourite icon
     public void updateIcon()
     {
         if(singleUniqueItem.getItemFavourite())

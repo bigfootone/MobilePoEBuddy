@@ -122,7 +122,6 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
         }
 
         return database != null;
-        //return false;
     }
 
     static private void copyDatabaseFromAssets(Context context) throws IOException
@@ -156,6 +155,7 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
         }
     }
 
+    //find items from database based on the category
     public SingleUniqueItem findItem(String category)
     {
         String query = "Select * FROM " + TBL_UNIQUEINFO + " WHERE " + COL_ITEMID + " = \"" + category + "\"";
@@ -191,6 +191,7 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
 
 
 
+    //find number of rows in database
     public int getNumberOfRows(String category)
     {
         String query = "Select * FROM " + TBL_UNIQUEINFO + " WHERE " + COL_ITEMID + " = \"" + category + "\"";
@@ -204,6 +205,7 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
 
     public SingleUniqueItem findItemNameSearch(String category)
     {
+        //category == uniqueName
         String query = "Select * FROM " + TBL_UNIQUEINFO + " WHERE " + COL_UNIQUENAME + " = \"" + category + "\"";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(query, null);
@@ -235,6 +237,7 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
         return singleUniqueItem;
     }
 
+    //update an item's favourite status
     public void addToFavourites(Integer ID, Boolean value)
     {
         String query = "UPDATE " + TBL_UNIQUEINFO + " SET " + COL_ITEMFAVOURITE  + " = " + (value? 1:0) + " WHERE " + COL_ITEMID + " = " + ID;
@@ -254,6 +257,7 @@ public class UniqueItemDatabaseManager extends SQLiteOpenHelper {
         database.close();
     }
 
+    //set all items to not be favourites
     public void clearFavourites(Integer ID)
     {
         String query = "Update " + TBL_UNIQUEINFO + " SET " + COL_ITEMFAVOURITE + " = " + (0) + " WHERE " + COL_ITEMID + " = " + ID;

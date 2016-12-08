@@ -26,12 +26,6 @@ public class AsyncXMLParser extends AsyncTask<String, Integer, ArrayList<SingleD
     }
 
     @Override
-    protected void onPreExecute()
-    {
-        Toast.makeText(appContext, "Started parsing", Toast.LENGTH_SHORT).show();
-    }
-
-    @Override
     protected ArrayList<SingleDevPost> doInBackground(String... params)
     {
         XMLParser xmlParser = new XMLParser();
@@ -46,11 +40,5 @@ public class AsyncXMLParser extends AsyncTask<String, Integer, ArrayList<SingleD
 
         singleDevPostsArray = xmlParser.getAllPosts();
         return singleDevPostsArray;
-    }
-
-    @Override
-    protected void onPostExecute(ArrayList arrayList)
-    {
-        Toast.makeText(appContext, "Finished parsing", Toast.LENGTH_SHORT).show();
     }
 }

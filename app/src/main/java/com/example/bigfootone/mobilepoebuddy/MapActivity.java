@@ -62,22 +62,17 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
     private GoogleMap googleMap;
     private MapView mapView;
     private static final int REQUEST_LOCATION = 5;
-    private LocationListener locationListener;
     private LocationRequest locationRequest;
     private Location lastLocation;
     private GoogleApiClient apiClient;
-    private boolean firstlocation = true;
-    private LocationManager manager;
     private Marker homeMarker;
     private SharedPreferences preferences;
     private SaveHomeLocation homeLocation;
-    private Projection projection;
-    private double lastLong;
-    private double lastLat;
     private LatLng homeLatlng;
     private LatLng GGGHub = new LatLng(-36.848461, 174.763336);
     private Polyline line;
 
+    //some of the features did not work, left in as emulator wouldnt run maps and couldnt check to see what would work without android device
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
@@ -94,6 +89,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
                     @Override
                     public void onConnected(@Nullable Bundle bundle)
                     {
+                        //set the refresh rate for checking location, mix and max
                         locationRequest = new LocationRequest();
                         locationRequest.setInterval(1000);
                         locationRequest.setFastestInterval(100);
@@ -129,6 +125,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
         }
         else
         {
+            //if we dont have permission, request it
             AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
             alert.setMessage("Please allow access to your location to use this feature");
             alert.setTitle("Permission needed");
@@ -148,7 +145,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
         preferences = PreferenceManager.getDefaultSharedPreferences(getContext());
         homeLocation = new SaveHomeLocation(preferences);
 
-
+        //once the map has been clicked, ask if the user wants to change their home location
         gMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(final LatLng latLng)
@@ -157,6 +154,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
                 alert.setMessage("Do you wish to change your home location?");
                 alert.setTitle("Change Home Location");
                 Log.e("Mapping", "you made it");
+                //if the user clicks yes, remove the old marker.
                 alert.setPositiveButton("Ok", new DialogInterface.OnClickListener()
                 {
                     @Override
@@ -166,7 +164,9 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
                         {
                             homeMarker.remove();
                         }
+                        //add the latitude and longitude of the clicked location to the preferences
                         saveData(latLng, gMap);
+                        //calculate distance between set location and the clicked point
                         float distance[] = new float[1];
                         Location.distanceBetween(GGGHub.latitude, GGGHub.longitude, homeLatlng.latitude, homeLatlng.longitude, distance);
                         float moreDistance = distance[0] / 1000;
@@ -187,6 +187,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
             }
         });
 
+        //once the map has loaded up, grab the home location from the preferences and set it as a marker on the map.
         String latHome = preferences.getString("lat", "00.00");
         String longHome = preferences.getString("long", "00.00");
         Log.e("location", latHome);
@@ -201,6 +202,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
     @Override
     public void onLocationChanged(Location location)
     {
+        //if the user moves loation, update their location
         lastLocation = location;
         if(mapMarker != null)
         {
@@ -210,7 +212,6 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
         double longitude = lastLocation.getLongitude();
         mapMarker = googleMap.addMarker(new MarkerOptions().position(new LatLng(latitude, longitude)));
         mapMarker.setTitle("You are Here");
-        drawLine(googleMap);
     }
 
     @Override
@@ -231,6 +232,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
 
     }
 
+    //draw a line from the home location and the PoE offices in New Zealand
     public void drawLine(GoogleMap map)
     {
         if(line != null)
@@ -240,6 +242,7 @@ public class MapActivity extends Fragment implements OnMapReadyCallback, Locatio
         line = map.addPolyline(new PolylineOptions().add(homeLatlng, GGGHub).width(5).color(Color.BLACK));
     }
 
+    //save the home location to the user preferences
     public void saveData(LatLng latLng, GoogleMap gMap)
     {
         final String latitude = String.valueOf(latLng.latitude);

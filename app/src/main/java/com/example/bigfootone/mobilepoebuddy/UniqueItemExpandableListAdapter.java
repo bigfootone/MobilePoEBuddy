@@ -27,6 +27,7 @@ public class UniqueItemExpandableListAdapter extends BaseExpandableListAdapter {
         this.childData = childData;
     }
 
+    //find child items
     @Override
     public Object getChild(int groupPosition, int childPosition)
     {
@@ -39,6 +40,7 @@ public class UniqueItemExpandableListAdapter extends BaseExpandableListAdapter {
         return childPosition;
     }
 
+    //add the child item to a layout
     @Override
     public View getChildView(int position, final int childPosition, boolean isLastItem, View view, ViewGroup viewGroup)
     {
@@ -79,6 +81,7 @@ public class UniqueItemExpandableListAdapter extends BaseExpandableListAdapter {
         return position;
     }
 
+    //add parent item to a layout
     @Override
     public View getGroupView(int position, boolean isExpanded, View view, ViewGroup parent)
     {

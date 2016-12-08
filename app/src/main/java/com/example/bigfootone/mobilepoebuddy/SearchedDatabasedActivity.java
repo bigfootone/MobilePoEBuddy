@@ -19,16 +19,17 @@ public class SearchedDatabasedActivity extends AppCompatActivity {
     private Integer endID;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_searched_databased);
         listView = (ListView) findViewById(R.id.searchedListView);
         listView.setBackgroundColor(Color.rgb(90,90,90));
 
+        //get the subcategory that was clicked and number of rows in the database
         Intent intent = getIntent();
         String subCategory = (String) intent.getSerializableExtra("subCategory");
         endID = (Integer) intent.getSerializableExtra("NumberOfRows");
-
 
         android.support.v7.app.ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle(subCategory);
@@ -37,6 +38,7 @@ public class SearchedDatabasedActivity extends AppCompatActivity {
         UniqueItemDatabaseManager databaseManager = new UniqueItemDatabaseManager(getApplicationContext(), "UniqueItemDB.s3db", null, 1);
         SingleUniqueItem singleUniqueItem;
 
+        //for every item in the database that has the same subcategory that was passed in, add to listview
         for(int i = 3; i < endID; i++)
         {
             singleUniqueItem = databaseManager.findItem(Integer.toString(i));
@@ -59,6 +61,7 @@ public class SearchedDatabasedActivity extends AppCompatActivity {
     {
         super.onStart();
 
+        //if the user clicks on an item, add the name of it to an intent and load the view to display it
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
         {
             @Override

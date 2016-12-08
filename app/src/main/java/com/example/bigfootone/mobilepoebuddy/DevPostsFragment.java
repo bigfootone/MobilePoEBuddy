@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Process;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
@@ -23,6 +24,11 @@ import android.widget.Toast;
 
 import org.w3c.dom.Text;
 
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.InetAddress;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -50,7 +56,6 @@ public class DevPostsFragment extends Fragment {
         listView = (ListView) view.findViewById(R.id.list_view);
         listView.setBackgroundColor(Color.rgb(90,90,90));
         parseXML();
-
         setHasOptionsMenu(true);
 
         return view;
@@ -67,7 +72,7 @@ public class DevPostsFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> arg0, View arg1, int position, long arg3)
             {
-                //Toast.makeText(getActivity(), "clicked", Toast.LENGTH_SHORT).show();
+                //identify which post was clicked and open a new activity to disply
                 SingleDevPost thisPost = (SingleDevPost) listView.getAdapter().getItem(position);
                 Intent intent = new Intent(getContext(), devPostActivity.class);
                 intent.putExtra("postClicked", thisPost);
@@ -78,8 +83,10 @@ public class DevPostsFragment extends Fragment {
 
     public void parseXML()
     {
+        //create arraylist to hold all posts
         ArrayList<SingleDevPost> allDevPosts = new ArrayList<SingleDevPost>();
         String RSSURL = "http://www.gggtracker.com/rss.php";
+
         AsyncXMLParser asyncXMLParser = new AsyncXMLParser(getContext(), RSSURL);
 
         try
@@ -96,6 +103,7 @@ public class DevPostsFragment extends Fragment {
         }
 
         allPosts = allDevPosts;
+        //remove first empty post
         allPosts.remove(0);
         for (SingleDevPost singlePost: allPosts)
         {
@@ -106,6 +114,7 @@ public class DevPostsFragment extends Fragment {
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
+        //add button to the action bar that refreshes the feed
         super.onCreateOptionsMenu(menu, inflater);
         refresh = menu.add("Refresh");
         refresh.setShowAsAction(1);
@@ -116,11 +125,9 @@ public class DevPostsFragment extends Fragment {
             public boolean onMenuItemClick(MenuItem item)
             {
                 parseXML();
+                Toast.makeText(getActivity(), "Page refreshed", Toast.LENGTH_SHORT).show();
                 return true;
             }
         });
     }
-
-
-
 }
