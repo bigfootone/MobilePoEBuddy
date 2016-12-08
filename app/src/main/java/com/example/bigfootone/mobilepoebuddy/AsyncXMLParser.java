@@ -10,7 +10,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 /**
- * Created by Bigfootone on 22/11/2016.
+ * Created by David Stuart on 22/11/2016.
+ * S1313657
  */
 
 public class AsyncXMLParser extends AsyncTask<String, Integer, ArrayList<SingleDevPost>> {

@@ -20,7 +20,8 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 /**
- * Created by Bigfootone on 02/12/2016.
+ * Created by David Stuart on 02/12/2016.
+ * S1313657
  */
 
 public class SingleUniqueItemDisplay extends AppCompatActivity

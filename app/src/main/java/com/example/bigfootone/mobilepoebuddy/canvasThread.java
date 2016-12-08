@@ -7,7 +7,8 @@ import android.graphics.RectF;
 import android.view.SurfaceHolder;
 
 /**
- * Created by Bigfootone on 07/12/2016.
+ * Created by David Stuart on 07/12/2016.
+ * S1313657
  */
 
 public class canvasThread extends Thread{

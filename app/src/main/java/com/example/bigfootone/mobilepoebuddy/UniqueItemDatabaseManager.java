@@ -17,7 +17,8 @@ import java.io.OutputStream;
 import java.util.Locale;
 
 /**
- * Created by Bigfootone on 30/11/2016.
+ * Created by David Stuart on 30/11/2016.
+ * S1313657
  */
 
 public class UniqueItemDatabaseManager extends SQLiteOpenHelper {

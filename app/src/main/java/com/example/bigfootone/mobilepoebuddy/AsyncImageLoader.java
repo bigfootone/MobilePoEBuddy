@@ -13,7 +13,8 @@ import java.net.MalformedURLException;
 import java.util.ArrayList;
 
 /**
- * Created by Bigfootone on 29/11/2016.
+ * Created by David Stuart on 29/11/2016.
+ * S1313657
  */
 
 public class AsyncImageLoader extends AsyncTask <String, Void, Bitmap>{

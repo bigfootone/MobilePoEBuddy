@@ -22,10 +22,10 @@ import android.widget.RelativeLayout;
 import android.widget.ScrollView;
 import android.widget.TextView;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+/**
+ * Created by David Stuart
+ * 1313657
+ */
 
 public class devPostActivity extends AppCompatActivity {
 

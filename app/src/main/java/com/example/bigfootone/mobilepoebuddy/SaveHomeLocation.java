@@ -10,7 +10,8 @@ import android.util.Log;
 import com.google.android.gms.maps.MapView;
 
 /**
- * Created by Bigfootone on 05/12/2016.
+ * Created by David Stuart on 05/12/2016.
+ * S1313657
  */
 
 public class SaveHomeLocation extends Activity{

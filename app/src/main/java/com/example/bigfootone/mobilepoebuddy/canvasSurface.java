@@ -6,7 +6,8 @@ import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 
 /**
- * Created by Bigfootone on 07/12/2016.
+ * Created by David Stuart on 07/12/2016.
+ * S1313657
  */
 
 public class canvasSurface extends SurfaceView implements SurfaceHolder.Callback {

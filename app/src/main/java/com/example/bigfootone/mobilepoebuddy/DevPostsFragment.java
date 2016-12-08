@@ -36,12 +36,8 @@ import java.util.concurrent.ExecutionException;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link DevPostsFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link DevPostsFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by David Stuart
+ * S1313657
  */
 public class DevPostsFragment extends Fragment {
 

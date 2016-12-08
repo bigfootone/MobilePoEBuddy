@@ -20,6 +20,10 @@ import android.widget.TextView;
 
 import java.io.IOException;
 
+/**
+ * Created by David Stuart
+ * S1313657
+ */
 
 public class MainActivity extends AppCompatActivity {
 

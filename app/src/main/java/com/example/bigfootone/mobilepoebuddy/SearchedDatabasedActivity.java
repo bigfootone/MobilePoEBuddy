@@ -11,6 +11,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+/**
+ * Created by David Stuart
+ * S1313657
+ */
+
 public class SearchedDatabasedActivity extends AppCompatActivity {
 
     private ArrayList<String> currentUniques = new ArrayList<>();

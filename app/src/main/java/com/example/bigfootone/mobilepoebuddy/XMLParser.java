@@ -16,7 +16,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 /**
- * Created by Bigfootone on 17/11/2016.
+ * Created by David Stuart on 17/11/2016.
+ * S1313657
  */
 
 public class XMLParser {

@@ -32,12 +32,8 @@ import java.util.Map;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link UniqueItemFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link UniqueItemFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by David Stuart
+ * S1313657
  */
 public class UniqueItemFragment extends Fragment {
 

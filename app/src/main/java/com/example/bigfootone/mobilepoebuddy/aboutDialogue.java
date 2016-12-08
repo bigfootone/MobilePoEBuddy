@@ -10,7 +10,8 @@ import android.widget.Toast;
 
 
 /**
- * Created by Bigfootone on 03/12/2016.
+ * Created by David Stuart on 03/12/2016.
+ * S1313657
  */
 
 public class aboutDialogue extends DialogFragment {

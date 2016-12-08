@@ -13,7 +13,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 /**
- * Created by Bigfootone on 27/11/2016.
+ * Created by David Stuart on 27/11/2016.
+ * S1313657
  */
 
  class devPostArrayAdapter extends ArrayAdapter<SingleDevPost>

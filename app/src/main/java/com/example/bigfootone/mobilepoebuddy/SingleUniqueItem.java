@@ -3,7 +3,8 @@ package com.example.bigfootone.mobilepoebuddy;
 import java.io.Serializable;
 
 /**
- * Created by Bigfootone on 30/11/2016.
+ * Created by David Stuart on 30/11/2016.
+ * S1313657
  */
 
 public class SingleUniqueItem implements Serializable {

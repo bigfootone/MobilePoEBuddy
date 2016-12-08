@@ -10,7 +10,8 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 /**
- * Created by Bigfootone on 01/12/2016.
+ * Created by David Stuart on 01/12/2016.
+ * S1313657
  */
 
 public class UniqueItemArrayAdapter extends ArrayAdapter<String>
